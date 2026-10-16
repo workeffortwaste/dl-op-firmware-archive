@@ -8,7 +8,7 @@ The OP-1 Field downloader does not omit any versions.
 
 ## OP-XY Versions
 
-The OP-XY downloader omits versions that are unavailable on the internet Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
+The OP-XY downloader omits versions that are unavailable on the Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
 
 ## Usage
 
