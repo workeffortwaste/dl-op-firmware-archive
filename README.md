@@ -23,8 +23,8 @@ The TP-7 downloader does not omit any historic versions.
 Clone the repository, make the script executable, and run it. With no product selected, it downloads all four sets of firmware:
 
 ```sh
-git clone <repository-url>
-cd dl-op1-firmware-archive
+git clone https://github.com/workeffortwaste/dl-op-firmware-archive
+cd dl-op-firmware-archive
 chmod +x dl-op-firmware-archive.sh
 ./dl-op-firmware-archive.sh
 ```
