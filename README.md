@@ -4,19 +4,19 @@ A Bash script for downloading historical OP-1 Field, OP-XY, TX-6, and TP-7 firmw
 
 ## OP-1 Field Versions
 
-The OP-1 Field downloader does not omit any versions.
+The OP-1 Field downloader does not omit any historic versions.
 
 ## OP-XY Versions
 
-The OP-XY downloader omits versions that are unavailable on the Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
+The OP-XY downloader omits historic versions that are unavailable on the Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
 
 ## TX-6 Versions
 
-The TX-6 does not omit any versions.
+The TX-6 downloader does not omit any historic versions.
 
 ## TP-7 Versions
 
-The TP-7 does not omit any versions.
+The TP-7 downloader does not omit any historic versions.
 
 ## Usage
 
