@@ -1,6 +1,6 @@
 # OP Firmware Archive
 
-A Bash script for downloading historical OP-1 Field and OP-XY firmware files from the Internet Archive and checks for the `babecafe` header.
+A Bash script for downloading historical OP-1 Field, OP-XY, TX-6, and TP-7 firmware files from the Internet Archive. Downloads are checked for the `babecafe` header and their SHA-256 checksums are printed.
 
 ## OP-1 Field Versions
 
@@ -10,9 +10,17 @@ The OP-1 Field downloader does not omit any versions.
 
 The OP-XY downloader omits versions that are unavailable on the Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
 
+## TX-6 Versions
+
+The TX-6 does not omit any versions.
+
+## TP-7 Versions
+
+The TP-7 does not omit any versions.
+
 ## Usage
 
-Clone the repository, make the script executable, and run it. With no device selected, it downloads both set of firmware:
+Clone the repository, make the script executable, and run it. With no product selected, it downloads all four sets of firmware:
 
 ```sh
 git clone <repository-url>
@@ -21,14 +29,16 @@ chmod +x dl-op-firmware-archive.sh
 ./dl-op-firmware-archive.sh
 ```
 
-Pass `op1f` or `opxy` to download firmware for only one device. By default, files go into `op1f-firmware` and `opxy-firmware`. An optional output directory can follow the selector; with `all`, it is used as the parent directory for both device folders.
+Pass `op1f`, `opxy`, `tx6`, or `tp7` to download firmware for one product. By default, files go into `op1f-firmware`, `opxy-firmware`, `tx6-firmware`, and `tp7-firmware`. An optional output directory can follow the selector; with `all`, it is used as the parent directory for all four product folders.
 
 ```sh
 ./dl-op-firmware-archive.sh op1f [output-directory]
 ./dl-op-firmware-archive.sh opxy [output-directory]
+./dl-op-firmware-archive.sh tx6 [output-directory]
+./dl-op-firmware-archive.sh tp7 [output-directory]
 ```
 
-Newer OP-1 Field and XY `+1` variants are intentionally excluded and can be downloaded directly from TE.
+Newer `+1` variants are intentionally excluded from the archive downloader and can be downloaded directly from TE.
 
 ## Expected Output
 
@@ -76,5 +86,34 @@ Fetching opxy_firmware_1_0_21.tfw ... saved (SHA-256 0eb2fe4b53f87148da1c485ecd1
 Fetching opxy_firmware_1_0_15.tfw ... saved (SHA-256 2a038a3c98cd03166ffd0b2825bdb7cff30bec8fd91877622ddc1a60cc327cda)
 Fetching opxy_firmware_1_0_13.tfw ... saved (SHA-256 5d6821f404da53c144d927a6d9346b96d4fbbaa0d4bb3cdebac92e3ac564ee95)
 Fetching opxy_firmware_1_0_9.tfw ... saved (SHA-256 d66fc1d3c413f907aabe4b043121cc73a9945012ddcadcd3c15caaaae19c133e)
+```
+
+### TX-6
+
+```text
+Fetching tx-6_firmware_1_0_8.tfw ... saved (SHA-256 0ad3a15ba8e9574c0fe1b9371469d2adb958cd68d0696861facdb4475d350001)
+Fetching tx-6_firmware_1_1_4.tfw ... saved (SHA-256 a31352105d691a1358d4ab9fd8f61bc8a2363f0015ff6e97de5ebbcc1b8d7912)
+Fetching tx-6_firmware_1_2_10.tfw ... saved (SHA-256 9eee04af6a8a1e7e4433e64416ec499682dbbcebe353527b8f6b074095303aee)
+Fetching tx-6_firmware_1_2_12.tfw ... saved (SHA-256 29e968d4c104b3131406c9f186a6f5524c905fdd07b37e8911f1db50fc4a5728)
+Fetching tx-6_firmware_1_2_13.tfw ... saved (SHA-256 74fc46761ffc0ee455a3fdf2d8314417f1c8119540dede8ba5ea6cea5a60e0f7)
+Fetching tx-6_firmware_1_2_15.tfw ... saved (SHA-256 bfb072c3658d38f1eb966242221112b6f9846f6ac303fbdd892dc2e51cf4eeb5)
+Fetching tx-6_firmware_1_2_5.tfw ... saved (SHA-256 db42846394f19595909f1c511f50a85d1fcaf8276637bb12d53673a18d4ee462)
+Fetching tx-6_firmware_1_3_0.tfw ... saved (SHA-256 1b460a22d96c4294d2669374e7ca0b4b51bb9e15e4af17c381e17339e9f2f8c6)
+Fetching tx-6_firmware_1_3_1.tfw ... saved (SHA-256 565c22336ae8ccc85f724f45225dd664238a7d6b361047d3be16c40888b2b98d)
+Fetching tx-6_firmware_1_3_3.tfw ... saved (SHA-256 9c3a13c5e9f63901bdad79d6d3919521ad388d2469413c3447d7d09009d36db0)
+```
+
+### TP-7
+
+```text
+Fetching tp-7_firmware_1_0_6.tfw ... saved (SHA-256 f147e150bcf8d679ebf8692f135a320a120386f44a30abee1687de6b872709f7)
+Fetching tp-7_firmware_1_0_8.tfw ... saved (SHA-256 7352f8d20719a5eb06bffef2ff9266ec6e63f825e1a5bed8d2b0ffab327c274e)
+Fetching tp-7_firmware_1_1_10.tfw ... saved (SHA-256 319fc6bdd3c2b6af6654453b0756f1842291ea27e2226120b29774c437d139cf)
+Fetching tp-7_firmware_1_1_11.tfw ... saved (SHA-256 3e3d0e67f2c1937d955a856f4afe6401801a66ef257b4ba2b4ce219d8129afa3)
+Fetching tp-7_firmware_1_1_3.tfw ... saved (SHA-256 69006a755535e3b5aeb006153756e46bde74442e9d05f71483e0c57995c6fbd4)
+Fetching tp-7_firmware_1_1_4.tfw ... saved (SHA-256 7ad12cf99d356c0fbcac43b95d3ea367bc699afb5a347cbb590af6061a88a990)
+Fetching tp-7_firmware_1_1_5.tfw ... saved (SHA-256 7cf1a5044ea9ee48432a5aeb3f3a329bea387ec74a709c248779fe4f92abcf21)
+Fetching tp-7_firmware_1_1_6.tfw ... saved (SHA-256 38f1b5b100aba0d2fbf91bd832bc8dcf4c3461e0b8c945b4f6ae32a2ccc6bd94)
+Fetching tp-7_firmware_1_1_9.tfw ... saved (SHA-256 73ebc765743335fa818143cea55b9ac0991a30517ac3fe5b64df68d9765346ed)
 ```
 

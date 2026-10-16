@@ -2,7 +2,7 @@
 set -u
 
 usage() {
-  printf 'Usage: %s [op1f|opxy|all] [output-directory]\n' "${0##*/}" >&2
+  printf 'Usage: %s [op1f|opxy|tx6|tp7|all] [output-directory]\n' "${0##*/}" >&2
 }
 
 if (( $# > 2 )); then
@@ -14,7 +14,7 @@ product="${1:-all}"
 custom_out="${2:-}"
 
 case "$product" in
-  op1f|opxy|all) ;;
+  op1f|opxy|tx6|tp7|all) ;;
   *)
     usage
     exit 2
@@ -23,6 +23,8 @@ esac
 
 op1f_capture='20260610192422'
 opxy_capture='20261016205613'
+tx6_capture='20260610164032'
+tp7_capture='20260610164309'
 
 op1f_versions=(
   1_7_3
@@ -64,6 +66,31 @@ opxy_versions=(
   1_0_15
   1_0_13
   1_0_9
+)
+
+tx6_versions=(
+  1_0_8
+  1_1_4
+  1_2_10
+  1_2_12
+  1_2_13
+  1_2_15
+  1_2_5
+  1_3_0
+  1_3_1
+  1_3_3
+)
+
+tp7_versions=(
+  1_0_6
+  1_0_8
+  1_1_10
+  1_1_11
+  1_1_3
+  1_1_4
+  1_1_5
+  1_1_6
+  1_1_9
 )
 
 download_firmware() {
@@ -115,15 +142,29 @@ case "$product" in
     out_dir="${custom_out:-opxy-firmware}"
     download_firmware "$opxy_capture" '_software/op-xy' 'opxy_firmware_' "$out_dir" "${opxy_versions[@]}"
     ;;
+  tx6)
+    out_dir="${custom_out:-tx6-firmware}"
+    download_firmware "$tx6_capture" '_software/tx-6' 'tx-6_firmware_' "$out_dir" "${tx6_versions[@]}"
+    ;;
+  tp7)
+    out_dir="${custom_out:-tp7-firmware}"
+    download_firmware "$tp7_capture" '_software/tp-7' 'tp-7_firmware_' "$out_dir" "${tp7_versions[@]}"
+    ;;
   all)
     if [[ -n "$custom_out" ]]; then
       out_op1f="${custom_out%/}/op1f-firmware"
       out_opxy="${custom_out%/}/opxy-firmware"
+      out_tx6="${custom_out%/}/tx6-firmware"
+      out_tp7="${custom_out%/}/tp7-firmware"
     else
       out_op1f='op1f-firmware'
       out_opxy='opxy-firmware'
+      out_tx6='tx6-firmware'
+      out_tp7='tp7-firmware'
     fi
     download_firmware "$op1f_capture" '_software/op-1/field' 'op1_field_firmware_' "$out_op1f" "${op1f_versions[@]}"
     download_firmware "$opxy_capture" '_software/op-xy' 'opxy_firmware_' "$out_opxy" "${opxy_versions[@]}"
+    download_firmware "$tx6_capture" '_software/tx-6' 'tx-6_firmware_' "$out_tx6" "${tx6_versions[@]}"
+    download_firmware "$tp7_capture" '_software/tp-7' 'tp-7_firmware_' "$out_tp7" "${tp7_versions[@]}"
     ;;
 esac
