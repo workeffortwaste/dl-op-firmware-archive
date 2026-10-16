@@ -1,21 +1,38 @@
-# OP-1 Field Firmware Archive
+# OP Firmware Archive
 
-A Bash script for downloading historical OP-1 Field firmware files from the Internet Archive.
+A Bash script for downloading historical OP-1 Field and OP-XY firmware files from the Internet Archive and checks for the `babecafe` header.
+
+## OP-1 Field Versions
+
+The OP-1 Field downloader does not omit any versions.
+
+## OP-XY Versions
+
+The OP-XY downloader omits versions that are not listed on the current downloads page but are archived on the Internet Archive: `1_1_33`, `1_1_32`, `1_1_25`, `1_1_21`, `1_1_18`, `1_1_17`, and `1_0_29`.
 
 ## Usage
 
-Clone the repository, make the script executable, and run it:
+Clone the repository, make the script executable, and run it. With no device selected, it downloads both set of firmware:
 
 ```sh
 git clone <repository-url>
 cd dl-op1-firmware-archive
-chmod +x dl-op1f-firmware-archive.sh
-./dl-op1f-firmware-archive.sh [output-directory]
+chmod +x dl-op-firmware-archive.sh
+./dl-op-firmware-archive.sh
 ```
 
-The output directory is optional and defaults to `op1f-firmware`.
+Pass `op1f` or `opxy` to download firmware for only one device. By default, files go into `op1f-firmware` and `opxy-firmware`. An optional output directory can follow the selector; with `all`, it is used as the parent directory for both device folders.
+
+```sh
+./dl-op-firmware-archive.sh op1f [output-directory]
+./dl-op-firmware-archive.sh opxy [output-directory]
+```
+
+Newer OP-1 Field and XY `+1` variants are intentionally excluded and can be downloaded directly from TE.
 
 ## Expected Output
+
+### OP-1 Field
 
 ```text
 Fetching op1_field_firmware_1_7_3.tfw ... saved (SHA-256 e58539115a8579ddf554a48ddb1439f6d5aa3c25bea4f2c19ceee2b5c946cc82)
@@ -41,4 +58,23 @@ Fetching op1_field_firmware_1_1_4.tfw ... saved (SHA-256 1ea7b6e381b943ff74a106c
 Fetching op1_field_firmware_1_1_2.tfw ... saved (SHA-256 04d2118b68ad777c0fcba93f80d701a8ae1d4dcb57be3ef5ad7cb2ba2af11c18)
 ```
 
-Each download is checked for an HTTP 200 response and the expected `babecafe` file header. Valid files are saved as `op1_field_firmware_<version>.tfw`, and their SHA-256 checksums are printed. Failed downloads or files that do not pass validation are reported and their temporary files are removed.
+### OP-XY
+
+```text
+Fetching opxy_firmware_1_1_15.tfw ... saved (SHA-256 fb91b5884a626d77d8fee16fbdc7611802de86409c91f9ba3a56bf58a870da41)
+Fetching opxy_firmware_1_1_4.tfw ... saved (SHA-256 7951a8658b3cd7b1eafb70c95a310ee95966929d130523ddb78160fba6b633d9)
+Fetching opxy_firmware_1_1_3.tfw ... saved (SHA-256 43353cd118b72ea2ab4a2b915ecbe82054bf6b5a0e52b3bcfd073e26e99bec1c)
+Fetching opxy_firmware_1_1_0.tfw ... saved (SHA-256 01bb6b235e95d84454d57102398ca2a96c00c4a31fd068cb487f2cd4979642f8)
+Fetching opxy_firmware_1_0_50.tfw ... saved (SHA-256 9c9047ab59cd99788e4b505de80bfaa6c3a34fe3d6047c9ebf5e4330566d50fd)
+Fetching opxy_firmware_1_0_45.tfw ... saved (SHA-256 0801f7053398a814f79661d0fb6bef16879921ac4aeba59e5b814afcc3dbadce)
+Fetching opxy_firmware_1_0_40.tfw ... saved (SHA-256 16722b2f5455610aac5553b21e2d8da70e51f87a5c050b34a515c806020c605e)
+Fetching opxy_firmware_1_0_38.tfw ... saved (SHA-256 844f84bd59dfadcb672c1b2fd9f1986841ac6741dcd203d9818f8086271171ee)
+Fetching opxy_firmware_1_0_36.tfw ... saved (SHA-256 c26235022f4948dc3c92e2cb8b5b6a49a2e646e83f516f4940641256749928a4)
+Fetching opxy_firmware_1_0_32.tfw ... saved (SHA-256 75a963d383edb77444af40d20dbe114190da6c1558e51692eab929b559c3880d)
+Fetching opxy_firmware_1_0_25.tfw ... saved (SHA-256 5b5ed7e228b36d59853a8a67d5b47e142bb4fcc7f36aae7bce26dba4e36e0c0c)
+Fetching opxy_firmware_1_0_21.tfw ... saved (SHA-256 0eb2fe4b53f87148da1c485ecd100a3acd0f3a81d60e2d6a2c6a4b5e77dc5e7d)
+Fetching opxy_firmware_1_0_15.tfw ... saved (SHA-256 2a038a3c98cd03166ffd0b2825bdb7cff30bec8fd91877622ddc1a60cc327cda)
+Fetching opxy_firmware_1_0_13.tfw ... saved (SHA-256 5d6821f404da53c144d927a6d9346b96d4fbbaa0d4bb3cdebac92e3ac564ee95)
+Fetching opxy_firmware_1_0_9.tfw ... saved (SHA-256 d66fc1d3c413f907aabe4b043121cc73a9945012ddcadcd3c15caaaae19c133e)
+```
+
